@@ -12,3 +12,5 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect # Forma del dialecto que va ha utilizar a la hora de hacer las consultas
+  thymeleaf:
+    cache: false # Cuando la aplicacion este corriendo y poder modificar la plantilla
