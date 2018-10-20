@@ -1,0 +1,14 @@
+spring: 
+  datasource:
+    url:  jdbc:mysql://localhost:3306/prueba1
+    username: root
+    password: abcd.1234
+  jpa:
+    show-sql: true # Para que muestre el sql en el log
+    hibernate:
+      ddl-auto: update # Escanea todas la entitys, compara y actualiza la base de datos, dependiendo de las entidades y no al reves
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy # Forma del dialecto que va ha utilizar a la hora de hacer las consultas
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect # Forma del dialecto que va ha utilizar a la hora de hacer las consultas
