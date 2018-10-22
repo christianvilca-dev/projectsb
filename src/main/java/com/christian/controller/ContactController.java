@@ -33,8 +33,12 @@ public class ContactController {
 	}
 	
 	@GetMapping("/contactform")
-	private String redirectContactForm(Model model) {
-		model.addAttribute("contactModel", new ContactModel());
+	private String redirectContactForm(@RequestParam(name="id", required=false) int id, Model model) {
+		ContactModel contact = new ContactModel();
+		if (id!=0) {
+			contact = contactService.findContactByIdModel(id);
+		}
+		model.addAttribute("contactModel", contact);
 		return ViewConstant.CONTACT_FORM;
 	}
 	
@@ -44,6 +48,10 @@ public class ContactController {
 			Model model) {
 		LOG.info("METHOD: addContact() -- Params: " + contactModel.toString());
 		
+		// Para que Hibernate sepa que ya existe y no añadir una nueva
+		// En el repository el ".save()" no sabe distinguir si una entidad nueva o no
+		// si en el contalModel no le pasas un id y para ello en la vista se
+		// pone un "input hidden"
 		if (null!=contactService.addContact(contactModel)) {
 			model.addAttribute("result", 1);
 		} else {
