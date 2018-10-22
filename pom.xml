@@ -55,6 +55,15 @@
 		  <groupId>org.slf4j</groupId>
 		  <artifactId>slf4j-log4j12</artifactId>
 		</dependency>
+		<!-- Spring security 
+			-> mvn clean install
+			Al ejecutar el proyecto ya no sera funcional como antes porque tenemos
+			ahora una configuracion por defecto y se tendra que reescribir para 
+			que esto funcione -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>
