@@ -59,7 +59,7 @@ public class UserService implements UserDetailsService {
 	 *      roles del usuario autenticado (en realidad es nuestra entidad rol)
 	 */
 	private User buildUser(com.christian.entity.User user, List<GrantedAuthority> authorities) {
-		return new User(user.getUsername(), user.getPassword(), user.isEnabled(),
+		return new User(user.getUsername(), "{bcrypt}" + user.getPassword(), user.isEnabled(),
 				// Podiamos poner estos campos en la tabla de bd
 				// accountNonExpired -> No esta expirado la cuenta
 				// credentialsNonExpired -> No estan expiradas las credenciales
