@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +33,15 @@ public class ContactController {
 		return "redirect:/contacts/showcontacts";
 	}
 	
+	// @PreAuthorize -> Permite poner expresiones de spring
+	// El metodo debe ser public
+	// hasRole() -> Permite el acceso segun el rol, sino tiene permiso "Error 403"
+	// Se puede agregar tanto a nivel de metodo como de clase e inclusive en una service
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+	// @PreAuthorize("hasRole('ROLE_ADMIN') and hasRole('ROLE_USER')")
+	// @PreAuthorize("permiteAll()")
 	@GetMapping("/contactform")
-	private String redirectContactForm(@RequestParam(name="id", required=false) int id, Model model) {
+	public String redirectContactForm(@RequestParam(name="id", required=false) int id, Model model) {
 		ContactModel contact = new ContactModel();
 		if (id!=0) {
 			contact = contactService.findContactByIdModel(id);
